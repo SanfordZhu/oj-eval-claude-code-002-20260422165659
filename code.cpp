@@ -1,4 +1,8 @@
-#include "int2048.h"
+#include <complex>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <vector>
 
 namespace sjtu {
 
@@ -42,14 +46,6 @@ public:
         for (size_t i = start; i < s.length(); i += BASE_DIGITS) {
             int end = std::min(s.length(), i + BASE_DIGITS);
             int val = 0;
-            for (size_t j = i; j < end; j++) {
-                val = val * 10 + (s[j] - '0');
-            }
-            int shift = end - i;
-            for (int k = 0; k < shift; k++) {
-                if (k < shift - 1) val /= 10;
-            }
-            val = 0;
             for (size_t j = i; j < end; j++) {
                 val = val * 10 + (s[j] - '0');
             }
@@ -310,6 +306,55 @@ public:
         }
         return result;
     }
+};
+
+class int2048 {
+  BigInt *data;
+public:
+  int2048();
+  int2048(long long);
+  int2048(const std::string &);
+  int2048(const int2048 &);
+  ~int2048();
+
+  void read(const std::string &);
+  void print();
+
+  int2048 &add(const int2048 &);
+  friend int2048 add(int2048, const int2048 &);
+
+  int2048 &minus(const int2048 &);
+  friend int2048 minus(int2048, const int2048 &);
+
+  int2048 operator+() const;
+  int2048 operator-() const;
+
+  int2048 &operator=(const int2048 &);
+
+  int2048 &operator+=(const int2048 &);
+  friend int2048 operator+(int2048, const int2048 &);
+
+  int2048 &operator-=(const int2048 &);
+  friend int2048 operator-(int2048, const int2048 &);
+
+  int2048 &operator*=(const int2048 &);
+  friend int2048 operator*(int2048, const int2048 &);
+
+  int2048 &operator/=(const int2048 &);
+  friend int2048 operator/(int2048, const int2048 &);
+
+  int2048 &operator%=(const int2048 &);
+  friend int2048 operator%(int2048, const int2048 &);
+
+  friend std::istream &operator>>(std::istream &, int2048 &);
+  friend std::ostream &operator<<(std::ostream &, const int2048 &);
+
+  friend bool operator==(const int2048 &, const int2048 &);
+  friend bool operator!=(const int2048 &, const int2048 &);
+  friend bool operator<(const int2048 &, const int2048 &);
+  friend bool operator>(const int2048 &, const int2048 &);
+  friend bool operator<=(const int2048 &, const int2048 &);
+  friend bool operator>=(const int2048 &, const int2048 &);
 };
 
 int2048::int2048() : data(new BigInt()) {}

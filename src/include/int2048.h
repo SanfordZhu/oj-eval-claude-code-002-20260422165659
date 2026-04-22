@@ -18,14 +18,19 @@
 // Do not use "using namespace std;"
 
 namespace sjtu {
+class BigInt;
+
 class int2048 {
-  // todo
+  BigInt *data;
 public:
   // Constructors
   int2048();
   int2048(long long);
   int2048(const std::string &);
   int2048(const int2048 &);
+
+  // Destructor
+  ~int2048();
 
   // The parameter types of the following functions are for reference only, you can choose to use constant references or not
   // If needed, you can add other required functions yourself
